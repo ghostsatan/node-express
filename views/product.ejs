@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<title>
+			<%= title %>
+		</title>
+		<link rel='stylesheet' href='/stylesheets/style.css' />
+		<script>
+		    
+		    //对象
+			var rose={"name":"Rose","weight":"65"};
+			//序列化成字符串
+			var str=JSON.stringify(rose);
+			alert(str);
+			
+			//将字符串转换成JavaScript对象
+			var markStr='{"name":"mark","weight":"188"}';
+			var mark=JSON.parse(markStr);
+			alert(mark.name+"，"+mark.weight);
+		</script>
+	</head>
+
+	<body>
+		<h1><%= title %> - 产品列表</h1>
+		<table border="1" width="80%">
+			<tr>
+				<th>序号</th>
+				<th>名称</th>
+				<th>价格</th>
+				<th>操作</th>
+			</tr>
+			<%pdts.forEach(function(pdt,index){%>
+			<tr>
+				<td>
+					<%=index+1%>
+				</td>
+				<td>
+					<%=pdt.name%>
+				</td>
+				<td>
+					<%=pdt.price%>
+				</td>
+				<td>
+					<a href="/pdt/edit/<%=index%>">编辑</a>
+				</td>
+			</tr>
+			<%});%>
+		</table>
+
+		<ul>
+			<% for(var i=0; i<pdts.length; i++) {%>
+			<li>
+				<%=pdts[i].name%>
+			</li>
+			<% } %>
+		</ul>
+<p>
+			<%if(typeof msg!="undefined"){%>
+				<%=msg%>
+			<%}%>
+</p>
+		<form action="pdt/add" method="post">
+			<p>
+				名称：<input name="name" value="<%=(typeof obj!='undefined')?obj.name:""%>"/>
+			</p>
+			<p>
+				价格：<input name="price" value="<%=(typeof obj!='undefined')?obj.price:""%>"/>
+			</p>
+			<button>添加</button>
+		</form>
+		
+		
+		
+		
+	</body>
+
+</html>
